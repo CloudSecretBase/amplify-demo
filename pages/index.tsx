@@ -5,18 +5,54 @@ import {API, graphqlOperation} from "aws-amplify";
 
 import {listTodos} from "../src/graphql/queries";
 import {createTodo, deleteTodo, updateTodo} from "../src/graphql/mutations";
+import {onCreateTodo, onDeleteTodo, onUpdateTodo} from "../src/graphql/subscriptions";
+
 import {useEffect, useState} from "react";
 import classNames from "classnames";
 import {ListTodos, Todo} from '../src/graphql/types';
+import {Observable} from "zen-observable-ts";
 
 const Home: NextPage = () => {
     const [todos, setTodos] = useState<Todo[]>([]);
-    const [count, setCount] = useState(0);
 
     useEffect(() => {
-        console.log("useEffect");
         fetchTodos();
-    }, [count]);
+        console.log("subscribing");
+        const createGraphql = API.graphql(graphqlOperation(onCreateTodo)) as Observable<any>;
+        const subscriptionOnCreateTodo = createGraphql.subscribe({
+            next: (data: Todo[]) => {
+                console.log("subscriptionOnCreateTodo", data);
+                fetchTodos();
+            }
+        });
+
+        let updateGraphql = API.graphql(graphqlOperation(onUpdateTodo)) as Observable<any>;
+        const subscriptionOnUpdateTodo = updateGraphql.subscribe({
+            next: (data: Todo[]) => {
+                console.log("subscriptionOnUpdateTodo", data);
+                fetchTodos();
+            }
+        }, (err: any) => {
+
+        })
+        let deleteGraphql = API.graphql(graphqlOperation(onDeleteTodo)) as Observable<any>;
+        const subscriptionOnDeleteTodo = deleteGraphql.subscribe({
+            next: (data: Todo[]) => {
+                console.log("subscriptionOnDeleteTodo", data);
+                fetchTodos();
+            }
+        }, (err: any) => {
+            console.log("subscriptionOnDeleteTodo", err);
+        })
+
+        return () => {
+            console.log("unsubscribe events");
+            subscriptionOnCreateTodo.unsubscribe();
+            subscriptionOnUpdateTodo.unsubscribe();
+            subscriptionOnDeleteTodo.unsubscribe();
+        }
+
+    }, []);
 
     const fetchTodos = async () => {
         try {
@@ -25,7 +61,6 @@ const Home: NextPage = () => {
                 Date.parse(b.createdAt) - Date.parse(a.createdAt)
             )
             setTodos(todos);
-            setCount(todos.length);
         } catch (e) {
             console.error(e);
         }
@@ -34,7 +69,6 @@ const Home: NextPage = () => {
     const btnDelete = async (id: string) => {
         try {
             await API.graphql(graphqlOperation(deleteTodo, {input: {id}}));
-            setCount(count - 1);
         } catch (e) {
             console.error(e);
         }
@@ -50,7 +84,6 @@ const Home: NextPage = () => {
         }
         try {
             await API.graphql(graphqlOperation(createTodo, {input: todo}));
-            setCount(count + 1);
         } catch (e) {
             console.error(e);
         }
@@ -67,7 +100,6 @@ const Home: NextPage = () => {
 
         try {
             await API.graphql(graphqlOperation(updateTodo, {input: todoUpdate}));
-            setCount(todos.length + 1)
         } catch (e) {
             console.error(e);
         }
