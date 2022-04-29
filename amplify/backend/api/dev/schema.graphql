@@ -18,3 +18,9 @@ type News @model{
     link: String
     tag: String @index(name: "IdxByTag" , queryField: "newsByTag")
 }
+
+type Comment @model{
+  id: ID!
+  content:String!
+  author: String @default(value:"xiaomo")
+}
