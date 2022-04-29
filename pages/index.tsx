@@ -11,6 +11,7 @@ import {useEffect, useState} from "react";
 import classNames from "classnames";
 import {ListTodos, Todo} from '../src/graphql/types';
 import {Observable} from "zen-observable-ts";
+import _ from "lodash";
 
 const Home: NextPage = () => {
     const [todos, setTodos] = useState<Todo[]>([]);
@@ -81,6 +82,7 @@ const Home: NextPage = () => {
         const todo = {
             name: `todo${suffix}`,
             description: `description${suffix}`,
+            tag: _.sample(["game", "aws", "amplify", "react", "nextjs"]),
         }
         try {
             await API.graphql(graphqlOperation(createTodo, {input: todo}));
@@ -132,6 +134,7 @@ const Home: NextPage = () => {
                             return (
                                 <div key={index} className={classNames('border', 'w-full', 'my-3', 'p-5')}>
                                     <h3>{todo.name}</h3>
+                                    <h3>{todo.tag}</h3>
                                     <p>{todo.description}</p>
                                     <button
                                         className={classNames('border', 'px-3', 'py-1', 'm-2')}
