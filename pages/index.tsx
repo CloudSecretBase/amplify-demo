@@ -4,7 +4,7 @@ import styles from '../styles/Home.module.css'
 import {API, graphqlOperation} from "aws-amplify";
 
 import {listTodos} from "../src/graphql/queries";
-import {createTodo, deleteTodo,updateTodo} from "../src/graphql/mutations";
+import {createTodo, deleteTodo, updateTodo} from "../src/graphql/mutations";
 import {useEffect, useState} from "react";
 import classNames from "classnames";
 import {ListTodos, Todo} from '../src/graphql/types';
@@ -87,22 +87,31 @@ const Home: NextPage = () => {
                     Welcome to <a href="https://nextjs.org">Next.js!</a>
                 </h1>
                 <div>
-                    <button onClick={btnAddClick}>Add</button>
+                    <button
+                        onClick={btnAddClick}
+                        className={classNames('border', 'px-3', 'py-1', 'm-2')}
+                    >
+                        Add
+                    </button>
                 </div>
                 <hr/>
                 {
                     todos && todos.map((todo, index) => {
                             return (
-                                <div key={index} className={classNames('card', 'm-3', 'p-3')}>
+                                <div key={index} className={classNames('border', 'w-full', 'my-3', 'p-5')}>
                                     <h3>{todo.name}</h3>
                                     <p>{todo.description}</p>
-                                    <button className={classNames('btn')} onClick={() => {
-                                        btnUpdate(todo)
-                                    }}>update
+                                    <button
+                                        className={classNames('border', 'px-3', 'py-1', 'm-2')}
+                                        onClick={() => {
+                                            btnUpdate(todo)
+                                        }}>update
                                     </button>
-                                    <button className={classNames('btn')} onClick={() => {
-                                        btnDelete(todo.id)
-                                    }}>delete
+                                    <button
+                                        className={classNames('border', 'px-3', 'py-1', 'm-2')}
+                                        onClick={() => {
+                                            btnDelete(todo.id)
+                                        }}>delete
                                     </button>
                                 </div>
                             )

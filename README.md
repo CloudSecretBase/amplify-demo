@@ -55,3 +55,43 @@ Using default provider  awscloudformation
 ```
     yarn add aws-amplify @aws-amplify/ui-react
 ```
+
+
+## 添加样式框架tailwindcss
+```
+yarn add -D tailwindcss@latest postcss@latest autoprefixer@latest
+npx tailwindcss init tailwind.config.js
+
+module.exports = {
+  content: [
+    "./pages/**/*.{js,ts,jsx,tsx}",
+    "./components/**/*.{js,ts,jsx,tsx}",
+  ],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+}
+
+
+
+touch ./styles/styles.css
+
+ @tailwind base; 
+ @tailwind components; 
+ @tailwind utilities;
+ 
+ 
+ 
+ touch postcss.config.js
+ 
+ module.exports = {
+   plugins: ["tailwindcss", "postcss-preset-env"],
+};
+
+
+# 在_app.tsx中添加styles.css
+import '../styles/styles.css'
+
+
+```
