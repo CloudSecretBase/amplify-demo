@@ -1,10 +1,25 @@
 ## 创建app
+
 `yarn create next-app`
 
 ## 修改打包命令
+
+替换next.config.js中的打包命令，替换为：   
+
+```
+module.exports = {
+  images: {
+    loader: 'akamai',
+    path: ''
+  }
+}
+```
+
+package.json中的scripts中的build替换为：    
 `"build":"next build && next export"`
 
 ## 初始化
+
 ```
     amplify init
 Note: It is recommended to run this command from the root of your app directory
