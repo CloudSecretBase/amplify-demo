@@ -50,3 +50,8 @@ Please tell us about your project
 Using default provider  awscloudformation
 ? Select the authentication method you want to use: AWS profile
 ```
+
+## 导入包
+```
+    yarn add aws-amplify @aws-amplify/ui-react
+```

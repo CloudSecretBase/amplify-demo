@@ -2,8 +2,12 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
+import awsmobile from "../src/aws-exports";
 
 const Home: NextPage = () => {
+    const bunClick = ()=>{
+        console.log(awsmobile)
+    }
   return (
     <div className={styles.container}>
       <Head>
@@ -16,6 +20,9 @@ const Home: NextPage = () => {
         <h1 className={styles.title}>
           Welcome to <a href="https://nextjs.org">Next.js!</a>
         </h1>
+          <div>
+              <button onClick={bunClick}>Click</button>
+          </div>
       </main>
 
       <footer className={styles.footer}>
