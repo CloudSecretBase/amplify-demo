@@ -1,0 +1,12 @@
+{
+  "resourceName": "s3devstorageb6403c1e",
+  "bucketName": "dev-storage-b6403c1e",
+  "policyUUID": "fe24be9b",
+  "storageAccess": "auth",
+  "guestAccess": [],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ",
+    "DELETE"
+  ]
+}
