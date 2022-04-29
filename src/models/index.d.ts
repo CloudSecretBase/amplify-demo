@@ -12,6 +12,10 @@ type NewsMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
+type CommentMetaData = {
+  readOnlyFields: 'createdAt' | 'updatedAt';
+}
+
 export declare class Todo {
   readonly id: string;
   readonly name: string;
@@ -34,4 +38,14 @@ export declare class News {
   readonly updatedAt?: string | null;
   constructor(init: ModelInit<News, NewsMetaData>);
   static copyOf(source: News, mutator: (draft: MutableModel<News, NewsMetaData>) => MutableModel<News, NewsMetaData> | void): News;
+}
+
+export declare class Comment {
+  readonly id: string;
+  readonly content: string;
+  readonly author?: string | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+  constructor(init: ModelInit<Comment, CommentMetaData>);
+  static copyOf(source: Comment, mutator: (draft: MutableModel<Comment, CommentMetaData>) => MutableModel<Comment, CommentMetaData> | void): Comment;
 }
