@@ -38,3 +38,45 @@ export const onDeleteTodo = /* GraphQL */ `
     }
   }
 `;
+export const onCreateNews = /* GraphQL */ `
+  subscription OnCreateNews {
+    onCreateNews {
+      id
+      showOrder
+      title
+      image
+      link
+      tag
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateNews = /* GraphQL */ `
+  subscription OnUpdateNews {
+    onUpdateNews {
+      id
+      showOrder
+      title
+      image
+      link
+      tag
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteNews = /* GraphQL */ `
+  subscription OnDeleteNews {
+    onDeleteNews {
+      id
+      showOrder
+      title
+      image
+      link
+      tag
+      createdAt
+      updatedAt
+    }
+  }
+`;

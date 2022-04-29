@@ -3,8 +3,18 @@
 input AMPLIFY { globalAuthRule: AuthRule = { allow: public } } # FOR TESTING ONLY!
 
 type Todo @model {
-  id: ID!
-  name: String!
-  description: String
-  tag: String
+    id: ID!
+    name: String!
+    description: String
+    tag: String
+}
+
+
+type News @model{
+    id: ID! @primaryKey(sortKeyFields: ["showOrder"])
+    showOrder: ID!
+    title: String
+    image: String
+    link: String
+    tag: String
 }

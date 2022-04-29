@@ -33,3 +33,48 @@ export const listTodos = /* GraphQL */ `
     }
   }
 `;
+export const getNews = /* GraphQL */ `
+  query GetNews($id: ID!, $showOrder: ID!) {
+    getNews(id: $id, showOrder: $showOrder) {
+      id
+      showOrder
+      title
+      image
+      link
+      tag
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listNews = /* GraphQL */ `
+  query ListNews(
+    $id: ID
+    $showOrder: ModelIDKeyConditionInput
+    $filter: ModelNewsFilterInput
+    $limit: Int
+    $nextToken: String
+    $sortDirection: ModelSortDirection
+  ) {
+    listNews(
+      id: $id
+      showOrder: $showOrder
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      sortDirection: $sortDirection
+    ) {
+      items {
+        id
+        showOrder
+        title
+        image
+        link
+        tag
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
