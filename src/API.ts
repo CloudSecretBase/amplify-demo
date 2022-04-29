@@ -382,6 +382,32 @@ export type ListNewsQuery = {
   } | null,
 };
 
+export type NewsByTagQueryVariables = {
+  tag: string,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelNewsFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type NewsByTagQuery = {
+  newsByTag?:  {
+    __typename: "ModelNewsConnection",
+    items:  Array< {
+      __typename: "News",
+      id: string,
+      showOrder: string,
+      title?: string | null,
+      image?: string | null,
+      link?: string | null,
+      tag?: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
 export type OnCreateTodoSubscription = {
   onCreateTodo?:  {
     __typename: "Todo",

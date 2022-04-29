@@ -16,5 +16,5 @@ type News @model{
     title: String
     image: String
     link: String
-    tag: String
+    tag: String @index(name: "IdxByTag" , queryField: "newsByTag")
 }

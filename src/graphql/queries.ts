@@ -78,3 +78,32 @@ export const listNews = /* GraphQL */ `
     }
   }
 `;
+export const newsByTag = /* GraphQL */ `
+  query NewsByTag(
+    $tag: String!
+    $sortDirection: ModelSortDirection
+    $filter: ModelNewsFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    newsByTag(
+      tag: $tag
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        showOrder
+        title
+        image
+        link
+        tag
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
